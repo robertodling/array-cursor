@@ -1,0 +1,26 @@
+{
+  "name": "array-cursor",
+  "version": "0.1.0",
+  "description": "array-cursor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertodling/array-cursor.git"
+  },
+  "author": "Robert Ödling",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robertodling/array-cursor/issues"
+  },
+  "homepage": "https://github.com/robertodling/array-cursor",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "gulp": "^3.8.7",
+    "gulp-jshint": "^1.8.4",
+    "gulp-mocha": "^0.5.2",
+    "jshint-stylish": "^0.4.0"
+  }
+}
