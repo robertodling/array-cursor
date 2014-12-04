@@ -1,76 +1,76 @@
-function borrowArraryMethods(obj, arr){
-	
+function borrowArraryMethods(obj, arr) {
+
 	// copy "read" basics, use cursor.toArray() if full set is required
-	['forEach', 
-	 'some', 
+	['forEach',
+	 'some',
 	 'every',
 	 'reduce',
 	 'reduceRight',
-	].forEach(function(prop){
+	].forEach(function (prop) {
 		obj[prop] = arr[prop].bind(arr);
 	});
-	
+
 }
 
-function sliceArray(arr, offset, limit){
+function sliceArray(arr, offset, limit) {
 
-	if(offset === 0 && limit === 0){
+	if (offset === 0 && limit === 0) {
 		return arr;
-	}else if(limit === 0){
+	} else if (limit === 0) {
 		return arr.slice(offset);
-	}else {
-		return arr.slice(offset, limit+offset);	
+	} else {
+		return arr.slice(offset, limit + offset);
 	}
-	
-	
+
+
 }
 var arrayCursor = {
-	
-	init:function(arr){
+
+	init: function (arr) {
 		this.arr = arr;
 		this.reset();
 	},
-		
-	length : function(){
+
+	length: function () {
 		return this.sliced.length;
 	},
-	
-	next:function(){
+
+	next: function () {
 		return this.sliced[++this.currentIndex];
 	},
-	
-	hasNext:function(){
-		return this.currentIndex < this.length()-1;
+
+	hasNext: function () {
+		return this.currentIndex < this.length() - 1;
 	},
-	
-	toArray : function(){
+
+	toArray: function () {
 		return this.sliced;
 	},
-	
-	offset:function(offset){
+
+	offset: function (offset) {
 		this._offset = offset;
 		this.update();
 	},
-	
-	limit:function(limit){
+
+	limit: function (limit) {
 		this._limit = limit;
 		this.update();
 	},
-	
-	reset: function(){
+
+	reset: function () {
 		this._offset = 0;
 		this._limit = 0;
 		this.update();
 	},
-	
-	update: function(){
+
+	update: function () {
 		this.sliced = sliceArray(this.arr, this._offset, this._limit);
 		borrowArraryMethods(this, this.sliced);
 		this.currentIndex = -1;
 	}
 };
 
-module.exports = function(arr){
+module.exports = function (arr) {
 	var obj = Object.create(arrayCursor);
 	obj.init(arr);
 	return obj;
